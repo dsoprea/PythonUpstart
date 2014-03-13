@@ -4,15 +4,15 @@ This is a Python-based management interface for Upstart (Canonical's service
 layer). This library provides two bodies of functionality (in terms of 
 development priority):
 
-1. DBus-based communication with Upstart to query jobs, start/stop jobs, emit 
-  events, etc...
+1. Management commands (using D-Bus) to query jobs, start/stop jobs, emit 
+   events, etc...
 2. Writing and updating job files.
 
 **(2) is currently in development.**
 
 ##Dependencies
 
-- python-dbus (via apt)
+- *python-dbus* (under Ubuntu), or equivalent.
 
 ##Installation
 
@@ -21,6 +21,9 @@ sudo pip install upstart
 ```
 
 ##Usage
+
+The management commands usually return D-Bus types. However, they can generally 
+be treated like the corresponding standard Python types.
 
 ###System-Level Functions
 
@@ -125,13 +128,13 @@ dbus.Array([
     variant_level=1)
 ```
 
-Send the *start* event to the job.
+Send the *start* event to the job:
 
 ```
 >>> j.start()
 ```
 
-Send the *stop* event to the job.
+Send the *stop* event to the job:
 
 ```
 >>> j.stop()
