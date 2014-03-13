@@ -1,11 +1,11 @@
 Metadata-Version: 1.0
 Name: upstart
-Version: 0.2.3dev
+Version: 0.2.2-2-g093d800-dirty
 Summary: Upstart-based service management.
-Home-page: UNKNOWN
+Home-page: https://github.com/dsoprea/PythonUpstart
 Author: Dustin Oprea
 Author-email: myselfasunder@gmail.com
 License: GPL 2
-Description: UNKNOWN
+Description: An intuitive library interface to Upstart for service and job management. Requires the python-dbus Ubuntu package or equivalent.
 Keywords: upstart dbus
 Platform: UNKNOWN

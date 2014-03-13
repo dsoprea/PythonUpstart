@@ -1,9 +1,10 @@
-setup.cfg
 setup.py
 upstart/__init__.py
+upstart/_version.py
+upstart/job.py
+upstart/system.py
 upstart.egg-info/PKG-INFO
 upstart.egg-info/SOURCES.txt
 upstart.egg-info/dependency_links.txt
-upstart.egg-info/entry_points.txt
 upstart.egg-info/not-zip-safe
 upstart.egg-info/top_level.txt
