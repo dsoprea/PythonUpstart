@@ -1,0 +1,11 @@
+Metadata-Version: 1.0
+Name: upstart
+Version: 0.2.3dev
+Summary: Upstart-based service management.
+Home-page: UNKNOWN
+Author: Dustin Oprea
+Author-email: myselfasunder@gmail.com
+License: GPL 2
+Description: UNKNOWN
+Keywords: upstart dbus
+Platform: UNKNOWN
