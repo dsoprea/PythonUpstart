@@ -31,7 +31,8 @@ def test_system():
     s.emit('foo', { 'aa': 55 })
 
 def test_jobs():
-    from upstart.job import UpstartJob, JobBuilder
+    from upstart.job import UpstartJob, JobBuilder, JobBashScript, \
+                            JobPerlScript, JobPythonScript
 
 #    j = UpstartJob('smbd')
 #    j = UpstartJob('dustin2')
@@ -44,8 +45,15 @@ def test_jobs():
 #    j.stop()
 #    j.start()
 
+#    s = JobBashScript("echo\n")
+#    s = JobBashScript("echo\n", shell='/bin/sh')
+#    s = JobPerlScript("print()\n")
+    s = JobPythonScript("print()\n")
+
     jb = JobBuilder()
-    jb.description('Test description').author('Dustin Oprea').run('my_daemon')
+    jb.description('Test description').\
+       author('Dustin Oprea').\
+       run(s)#'my_daemon')
 
     job_raw = str(jb)
 
