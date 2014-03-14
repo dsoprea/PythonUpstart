@@ -4,6 +4,7 @@ import sys
 sys.path.insert(0, '..')
 
 from pprint import pprint
+from sys import stdout
 
 def test_system():
     from upstart.system import UpstartSystem
@@ -30,18 +31,28 @@ def test_system():
     s.emit('foo', { 'aa': 55 })
 
 def test_jobs():
-    from upstart.job import UpstartJob
+    from upstart.job import UpstartJob, JobBuilder
 
 #    j = UpstartJob('smbd')
-    j = UpstartJob('dustin2')
+#    j = UpstartJob('dustin2')
 #    pprint(j.get_status().keys())
-
+#
 #    c = j.get_start_on_condition()
 #    c = j.get_stop_on_condition()
 #    print(c)
+#
+#    j.stop()
+#    j.start()
 
-    j.stop()
-    j.start()
+    jb = JobBuilder()
+    jb.description('Test description').author('Dustin Oprea').run('my_daemon')
+
+    job_raw = str(jb)
+
+    print("================")
+    stdout.write(job_raw)
+    print("================")
+
 
 test_system()
 #test_jobs()
