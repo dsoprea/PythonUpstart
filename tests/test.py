@@ -54,6 +54,6 @@ def test_jobs():
     print("================")
 
 
-test_system()
-#test_jobs()
+#test_system()
+test_jobs()
 

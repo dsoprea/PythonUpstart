@@ -1,6 +1,6 @@
 import dbus
 
-from collections import OrderedDictionary
+from collections import OrderedDict
 from cStringIO import StringIO
 
 
@@ -113,20 +113,13 @@ end script"""
 
 class JobBuilder(object):
     def __init__(self):
-        self.__stanzas = OrderedDictionary()
+        self.__stanzas = OrderedDict()
 
     def __str__(self):
         self.__validate()
 
-        stanzas = self.__stanzas
-
-        run = stanzas['run']
-        del stanzas['run']
-
-        stanzas[run[0]] = run[1]
-
         s = StringIO()
-        for k, values in stanzas.iteritems():
+        for k, values in self.__stanzas.iteritems():
             for value in values:
                 s.write(k)
                 s.write(' ')
@@ -136,7 +129,8 @@ class JobBuilder(object):
         return s.getvalue()
 
     def __validate(self):
-        if 'run' not in self.__stanzas:
+        if 'exec' not in self.__stanzas and \
+           'script' not in self.__stanzas:
             raise ValueError("Please set exec/script before rendering.")
 
     def __add(self, stanza_type, raw):
@@ -164,7 +158,7 @@ class JobBuilder(object):
     def run(self, text):
         distilled = self.__script_or_exec_string(text)
 
-        if issubclass(command.__class__, basestring) is True:
+        if issubclass(text.__class__, basestring) is True:
             return self.__set('exec', distilled)
         else:
             return self.__set('script', distilled)

@@ -1,6 +1,6 @@
 Metadata-Version: 1.0
 Name: upstart
-Version: 0.2.2-2-g093d800-dirty
+Version: 0.2.3
 Summary: Upstart-based service management.
 Home-page: https://github.com/dsoprea/PythonUpstart
 Author: Dustin Oprea
