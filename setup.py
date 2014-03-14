@@ -1,8 +1,8 @@
 from setuptools import setup, find_packages
 import sys, os
 
-from os.path import dirname
-sys.path.insert(0, dirname(__file__))
+from os.path import dirname, abspath
+sys.path.insert(0, abspath(dirname(__file__)))
 
 import versioneer
 
