@@ -142,176 +142,173 @@ Send the *stop* event to the job:
 
 ### run(command)
 
-- 'exec'
-- 'script'
+- Stanza: 'exec', 'script'
 
 ### pre_start(command)
 
-- 'pre-start'
+- Stanza: 'pre-start'
 
 ### post_start(command)
 
-- 'post-start'
+- Stanza: 'post-start'
 
 ### pre_stop(command)
 
-- 'pre-stop'
+- Stanza: 'pre-stop'
 
 ### post_stop(command)
 
-- 'post-stop'
+- Stanza: 'post-stop'
 
 ### start_on(events, conjunct=None)
 
-- 'start_on'
+- Stanza: 'start_on'
 
 ### start_on_runlevel(runlevels=[2,3,4,5])
 
-- 'start on runlevel'
+- Stanza: 'start on runlevel'
 
 ### start_on_before_started(service)
 
-- 'start on starting'
+- Stanza: 'start on starting'
 
 ### start_on_after_started(service)
 
-- 'start on started'
+- Stanza: 'start on started'
 
 ### stop_on(events, conjunct=None)
 
-- 'stop on'
+- Stanza: 'stop on'
 
 ### stop_on_runlevel(runlevels=[0,1,6])
 
-- 'stop on runlevel'
+- Stanza: 'stop on runlevel'
 
 ### stop_on_before_stopped(service)
 
-- 'stop on stopping'
+- Stanza: 'stop on stopping'
 
 ### stop_on_after_stopped(service)
 
-- 'stop on stopped'
+- Stanza: 'stop on stopped'
 
 ### description(description)
 
-- 'description'
+- Stanza: 'description'
 
 ### author(author)
 
-- 'author'
+- Stanza: 'author'
 
 ### version(version)
 
-- 'version'
+- Stanza: 'version'
 
 ### emits(emits):
 
-- 'emits'
+- Stanza: 'emits'
 
 ### expect(type_='daemon')
 
-- 'expect fork'
-- 'expect daemon'
-- 'expect stop'
+- Stanza: 'expect fork', 'expect daemon', 'expect stop'
 
 ### respawn()
 
-- 'respawn'
+- Stanza: 'respawn'
 
 ### respawn_limit(count, timeout_s)
 
-- 'respawn limit'
+- Stanza: 'respawn limit'
 
 ### kill_timeout(timeout_s)
 
-- 'kill timeout'
+- Stanza: 'kill timeout'
 
 ### normal_exist(normal_codes=[], normal_signals=[])
 
-- 'normal timeout'
+- Stanza: 'normal timeout'
 
 ### console(target)
 
-- 'console'
+- Stanza: 'console'
 
 ### env(key, value)
 
-- 'env'
+- Stanza: 'env'
 
 ### env_kv(dict_)
 
-- 'env'
+- Stanza: 'env'
 
 ### export(env_name)
 
-- 'export'
+- Stanza: 'export'
 
 ### nice(priority)
 
-- 'nice'
+- Stanza: 'nice'
 
 ### limit(resource, soft_limit, hard_limit)
 
-- 'nproc'
+- Stanza: 'nproc'
 
 ### chdir(path)
 
-- 'chdir'
+- Stanza: 'chdir'
 
 ### chroot(path)
 
-- 'chroot'
+- Stanza: 'chroot'
 
 ### nice(priority)
 
-- 'nice'
+- Stanza: 'nice'
     
 ### apparmor_load(profile_path)
 
-- 'apparmor load'
+- Stanza: 'apparmor load'
     
 ### apparmor_switch(profile)
 
-- 'apparmor switch'
+- Stanza: 'apparmor switch'
 
 ### instance(var_name)
 
-- 'instance'
+- Stanza: 'instance'
 
 ### kill_signal(signal)
 
-- 'kill signal'
+- Stanza: 'kill signal'
 
 ### manual()
 
-- 'manual'
+- Stanza: 'manual'
 
-# oom_score(score)
+### oom_score(score)
 
-- 'oom score'
+- Stanza: 'oom score'
 
 ### reload_signal(signal)
 
-- 'reload signal'
+- Stanza: 'reload signal'
 
 ### setgid(group_name)
 
-- 'setgid'
+- Stanza: 'setgid'
 
 ### setuid(user_name)
 
-- 'setuid'
+- Stanza: 'setuid'
 
 ### task()
 
-- 'task'
+- Stanza: 'task'
 
 ### umask(value)
 
-- 'umask'
+- Stanza: 'umask'
 
 ### usage(text)
 
-- 'usage'
+- Stanza: 'usage'
 
