@@ -144,7 +144,7 @@ Send the *stop* event to the job:
 ####Example 1
 
 ```python
-from upstart.job import JobBuilder
+from upstart.job_builder import JobBuilder
 
 jb = JobBuilder()
 
@@ -172,7 +172,7 @@ exec /usr/bin/my_daemon
 ####Example 2
 
 ```python
-from upstart.job import JobBuilder, JobPythonScript
+from upstart.job_builder import JobBuilder, JobPythonScript
 
 s = JobPythonScript("""
 import time
