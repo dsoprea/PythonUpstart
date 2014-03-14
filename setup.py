@@ -1,7 +1,11 @@
 from setuptools import setup, find_packages
 import sys, os
 
+from os.path import dirname
+sys.path.insert(0, dirname(__file__))
+
 import versioneer
+
 versioneer.versionfile_source = 'upstart/_version.py'
 versioneer.versionfile_build = 'upstart/_version.py'
 versioneer.tag_prefix = ''
