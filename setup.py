@@ -1,18 +1,19 @@
 from setuptools import setup, find_packages
 import sys, os
 
-import versioneer
-versioneer.versionfile_source = 'upstart/_version.py'
-versioneer.versionfile_build = 'upstart/_version.py'
-versioneer.tag_prefix = ''
-versioneer.parentdir_prefix = 'upstart-'
+#from upstart import versioneer
+#
+#versioneer.versionfile_source = 'upstart/_version.py'
+#versioneer.versionfile_build = 'upstart/_version.py'
+#versioneer.tag_prefix = ''
+#versioneer.parentdir_prefix = 'upstart-'
 
 long_description=\
 "An intuitive library interface to Upstart for service and job management. "\
 "Requires the python-dbus Ubuntu package or equivalent."
 
 setup(name='upstart',
-      version=versioneer.get_version(),
+      version='0.2.11',#versioneer.get_version(),
       description="Upstart-based service management.",
       long_description=long_description,
       classifiers=[],
@@ -26,6 +27,6 @@ setup(name='upstart',
       zip_safe=False,
       install_requires=[],
       entry_points="",
-      cmdclass=versioneer.get_cmdclass(),
+#      cmdclass=versioneer.get_cmdclass(),
 )
 
