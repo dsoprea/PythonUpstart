@@ -274,7 +274,7 @@ class JobBuilder(object):
         assert issubclass(conjunct.__class__, (None, basestring))
 
         events = self.__stringify_events(events, conjunct)
-        return self.__set('stop on', event_and_env)
+        return self.__set('stop on', events)
 
     def stop_on_runlevel(self, runlevels=[0,1,6]):
         assert issubclass(runlevels.__class__, list)
