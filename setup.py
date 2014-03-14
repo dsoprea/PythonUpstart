@@ -1,11 +1,7 @@
 from setuptools import setup, find_packages
 import sys, os
 
-from os.path import dirname, abspath
-working_path = abspath(dirname(__file__))
-sys.path.insert(0, working_path)
-
-import versioneer
+from upstart import versioneer
 
 versioneer.versionfile_source = 'upstart/_version.py'
 versioneer.versionfile_build = 'upstart/_version.py'
