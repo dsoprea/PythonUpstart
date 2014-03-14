@@ -8,8 +8,6 @@ development priority):
    events, etc...
 2. Writing and updating job files.
 
-**(2) is currently in development.**
-
 ##Dependencies
 
 - *python-dbus* (under Ubuntu), or equivalent.
@@ -20,7 +18,7 @@ development priority):
 sudo pip install upstart
 ```
 
-##Usage
+##Upstart Management API
 
 The management commands usually return D-Bus types. However, they can generally 
 be treated like the corresponding standard Python types.
@@ -139,4 +137,181 @@ Send the *stop* event to the job:
 ```
 >>> j.stop()
 ```
+
+##Job-Building API
+
+### run(command)
+
+- 'exec'
+- 'script'
+
+### pre_start(command)
+
+- 'pre-start'
+
+### post_start(command)
+
+- 'post-start'
+
+### pre_stop(command)
+
+- 'pre-stop'
+
+### post_stop(command)
+
+- 'post-stop'
+
+### start_on(events, conjunct=None)
+
+- 'start_on'
+
+### start_on_runlevel(runlevels=[2,3,4,5])
+
+- 'start on runlevel'
+
+### start_on_before_started(service)
+
+- 'start on starting'
+
+### start_on_after_started(service)
+
+- 'start on started'
+
+### stop_on(events, conjunct=None)
+
+- 'stop on'
+
+### stop_on_runlevel(runlevels=[0,1,6])
+
+- 'stop on runlevel'
+
+### stop_on_before_stopped(service)
+
+- 'stop on stopping'
+
+### stop_on_after_stopped(service)
+
+- 'stop on stopped'
+
+### description(description)
+
+- 'description'
+
+### author(author)
+
+- 'author'
+
+### version(version)
+
+- 'version'
+
+### emits(emits):
+
+- 'emits'
+
+### expect(type_='daemon')
+
+- 'expect fork'
+- 'expect daemon'
+- 'expect stop'
+
+### respawn()
+
+- 'respawn'
+
+### respawn_limit(count, timeout_s)
+
+- 'respawn limit'
+
+### kill_timeout(timeout_s)
+
+- 'kill timeout'
+
+### normal_exist(normal_codes=[], normal_signals=[])
+
+- 'normal timeout'
+
+### console(target)
+
+- 'console'
+
+### env(key, value)
+
+- 'env'
+
+### env_kv(dict_)
+
+- 'env'
+
+### export(env_name)
+
+- 'export'
+
+### nice(priority)
+
+- 'nice'
+
+### limit(resource, soft_limit, hard_limit)
+
+- 'nproc'
+
+### chdir(path)
+
+- 'chdir'
+
+### chroot(path)
+
+- 'chroot'
+
+### nice(priority)
+
+- 'nice'
+    
+### apparmor_load(profile_path)
+
+- 'apparmor load'
+    
+### apparmor_switch(profile)
+
+- 'apparmor switch'
+
+### instance(var_name)
+
+- 'instance'
+
+### kill_signal(signal)
+
+- 'kill signal'
+
+### manual()
+
+- 'manual'
+
+# oom_score(score)
+
+- 'oom score'
+
+### reload_signal(signal)
+
+- 'reload signal'
+
+### setgid(group_name)
+
+- 'setgid'
+
+### setuid(user_name)
+
+- 'setuid'
+
+### task()
+
+- 'task'
+
+### umask(value)
+
+- 'umask'
+
+### usage(text)
+
+- 'usage'
 
