@@ -159,7 +159,7 @@ with open('/etc/init/my_daemon.conf', 'w') as f:
     f.write(str(jb))
 ```
 
-Output:
+Job config:
 
 ```
 description "Job description"
@@ -194,7 +194,7 @@ with open('/etc/init/my_daemon_2.conf', 'w') as f:
     f.write(str(jb))
 ```
 
-Output:
+Job config:
 
 ```
 description "Test description"
