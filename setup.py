@@ -4,6 +4,9 @@ import sys, os
 from distutils.dist import Distribution
 
 
+print("MODULE: %s" % (__name__))
+
+
 class VersionedDistribution(Distribution):
       """We set the versioneer components once the flow actually begins, and 
       all of the modules are in place.
