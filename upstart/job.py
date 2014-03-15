@@ -57,6 +57,8 @@ class UpstartJob(object):
 
 class _JobScriptBase(object):
     def __init__(self, code):
+        code = code.lstrip()
+
         if code[-1] != "\n":
             code += "\n"
 
@@ -255,6 +257,7 @@ class JobBuilder(object):
     def start_on_runlevel(self, runlevels=[2,3,4,5]):
         assert issubclass(runlevels.__class__, list)
 
+        runlevels = [str(r) for r in runlevels]
         return self.__set('start on', ('runlevel [%s]' % (''.join(runlevels))))
 
     def start_on_before_started(self, service):
@@ -279,6 +282,7 @@ class JobBuilder(object):
     def stop_on_runlevel(self, runlevels=[0,1,6]):
         assert issubclass(runlevels.__class__, list)
 
+        runlevels = [str(r) for r in runlevels]
         return self.__set('stop on', ('runlevel [%s]' % (''.join(runlevels))))
 
     def stop_on_before_stopped(self, service):

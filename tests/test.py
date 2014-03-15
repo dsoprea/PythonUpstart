@@ -48,14 +48,24 @@ def test_jobs():
 #    s = JobBashScript("echo\n")
 #    s = JobBashScript("echo\n", shell='/bin/sh')
 #    s = JobPerlScript("print()\n")
-    s = JobPythonScript("print()\n")
+    s = JobPythonScript("""
+import time
+while 1:
+    time.sleep(1)
+""")
 
     jb = JobBuilder()
     jb.description('Test description').\
-       author('Dustin Oprea').\
-       run(s)#'my_daemon')
+       author('Iam Admin <admin@corp.com>').\
+       start_on_runlevel().\
+       stop_on_runlevel().\
+       run(s)
 
-    job_raw = str(jb)
+    print(str(jb))
+    return
+
+    with open('/etc/init/my_daemon.conf', 'w') as f:
+        f.write(str(jb))
 
     print("================")
     stdout.write(job_raw)

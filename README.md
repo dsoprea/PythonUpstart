@@ -1,8 +1,7 @@
 ##Introduction
 
 This is a Python-based management interface for Upstart (Canonical's service 
-layer). This library provides two bodies of functionality (in terms of 
-development priority):
+layer). This library provides two main areas of functionality:
 
 1. Management commands (using D-Bus) to query jobs, start/stop jobs, emit 
    events, etc...
@@ -140,175 +139,248 @@ Send the *stop* event to the job:
 
 ##Job-Building API
 
-### run(command)
+###Examples
+
+####Example 1
+
+```python
+from upstart.job import JobBuilder
+
+jb = JobBuilder()
+
+# Build the job to start/stop with default runlevels to call a command.
+jb.description('Job description').\
+   author('Iam Admin <admin@corp.com>').\
+   start_on_runlevel().\
+   stop_on_runlevel().\
+   run('/usr/bin/my_daemon')
+
+with open('/etc/init/my_daemon.conf', 'w') as f:
+    f.write(str(jb))
+```
+
+Job config:
+
+```
+description "Job description"
+author "Iam Admin <admin@corp.com>"
+start on runlevel [2345]
+stop on runlevel [016]
+exec /usr/bin/my_daemon
+```
+
+####Example 2
+
+```python
+from upstart.job import JobBuilder, JobPythonScript
+
+s = JobPythonScript("""
+import time
+while 1:
+    time.sleep(1)
+""")
+
+jb = JobBuilder()
+
+# Build the job to start/stop with default runlevels to call a script 
+# fragment.
+jb.description('Test description').\
+   author('Iam Admin <admin@corp.com>').\
+   start_on_runlevel().\
+   stop_on_runlevel().\
+   run(s)
+
+with open('/etc/init/my_daemon_2.conf', 'w') as f:
+    f.write(str(jb))
+```
+
+Job config:
+
+```
+description "Test description"
+author "Iam Admin <admin@corp.com>"
+start on runlevel [2345]
+stop on runlevel [016]
+script 
+python - <<END
+import time
+while 1:
+    time.sleep(1)
+END
+end script
+```
+
+### Methods
+
+#### run(command)
 
 - Stanza: 'exec', 'script'
 
-### pre_start(command)
+#### pre_start(command)
 
 - Stanza: 'pre-start'
 
-### post_start(command)
+#### post_start(command)
 
 - Stanza: 'post-start'
 
-### pre_stop(command)
+#### pre_stop(command)
 
 - Stanza: 'pre-stop'
 
-### post_stop(command)
+#### post_stop(command)
 
 - Stanza: 'post-stop'
 
-### start_on(events, conjunct=None)
+#### start_on(events, conjunct=None)
 
 - Stanza: 'start_on'
 
-### start_on_runlevel(runlevels=[2,3,4,5])
+#### start_on_runlevel(runlevels=[2,3,4,5])
 
 - Stanza: 'start on runlevel'
 
-### start_on_before_started(service)
+#### start_on_before_started(service)
 
 - Stanza: 'start on starting'
 
-### start_on_after_started(service)
+#### start_on_after_started(service)
 
 - Stanza: 'start on started'
 
-### stop_on(events, conjunct=None)
+#### stop_on(events, conjunct=None)
 
 - Stanza: 'stop on'
 
-### stop_on_runlevel(runlevels=[0,1,6])
+#### stop_on_runlevel(runlevels=[0,1,6])
 
 - Stanza: 'stop on runlevel'
 
-### stop_on_before_stopped(service)
+#### stop_on_before_stopped(service)
 
 - Stanza: 'stop on stopping'
 
-### stop_on_after_stopped(service)
+#### stop_on_after_stopped(service)
 
 - Stanza: 'stop on stopped'
 
-### description(description)
+#### description(description)
 
 - Stanza: 'description'
 
-### author(author)
+#### author(author)
 
 - Stanza: 'author'
 
-### version(version)
+#### version(version)
 
 - Stanza: 'version'
 
-### emits(emits):
+#### emits(emits):
 
 - Stanza: 'emits'
 
-### expect(type_='daemon')
+#### expect(type_='daemon')
 
 - Stanza: 'expect fork', 'expect daemon', 'expect stop'
 
-### respawn()
+#### respawn()
 
 - Stanza: 'respawn'
 
-### respawn_limit(count, timeout_s)
+#### respawn_limit(count, timeout_s)
 
 - Stanza: 'respawn limit'
 
-### kill_timeout(timeout_s)
+#### kill_timeout(timeout_s)
 
 - Stanza: 'kill timeout'
 
-### normal_exist(normal_codes=[], normal_signals=[])
+#### normal_exist(normal_codes=[], normal_signals=[])
 
 - Stanza: 'normal timeout'
 
-### console(target)
+#### console(target)
 
 - Stanza: 'console'
 
-### env(key, value)
+#### env(key, value)
 
 - Stanza: 'env'
 
-### env_kv(dict_)
+#### env_kv(dict_)
 
 - Stanza: 'env'
 
-### export(env_name)
+#### export(env_name)
 
 - Stanza: 'export'
 
-### nice(priority)
+#### nice(priority)
 
 - Stanza: 'nice'
 
-### limit(resource, soft_limit, hard_limit)
+#### limit(resource, soft_limit, hard_limit)
 
 - Stanza: 'nproc'
 
-### chdir(path)
+#### chdir(path)
 
 - Stanza: 'chdir'
 
-### chroot(path)
+#### chroot(path)
 
 - Stanza: 'chroot'
 
-### nice(priority)
+#### nice(priority)
 
 - Stanza: 'nice'
     
-### apparmor_load(profile_path)
+#### apparmor_load(profile_path)
 
 - Stanza: 'apparmor load'
     
-### apparmor_switch(profile)
+#### apparmor_switch(profile)
 
 - Stanza: 'apparmor switch'
 
-### instance(var_name)
+#### instance(var_name)
 
 - Stanza: 'instance'
 
-### kill_signal(signal)
+#### kill_signal(signal)
 
 - Stanza: 'kill signal'
 
-### manual()
+#### manual()
 
 - Stanza: 'manual'
 
-### oom_score(score)
+#### oom_score(score)
 
 - Stanza: 'oom score'
 
-### reload_signal(signal)
+#### reload_signal(signal)
 
 - Stanza: 'reload signal'
 
-### setgid(group_name)
+#### setgid(group_name)
 
 - Stanza: 'setgid'
 
-### setuid(user_name)
+#### setuid(user_name)
 
 - Stanza: 'setuid'
 
-### task()
+#### task()
 
 - Stanza: 'task'
 
-### umask(value)
+#### umask(value)
 
 - Stanza: 'umask'
 
-### usage(text)
+#### usage(text)
 
 - Stanza: 'usage'
 
