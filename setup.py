@@ -50,6 +50,7 @@ class _VLazyVersion(str):
                   self.__version = self.__v.get_version()
                   self.__is_loaded = True
 
+            print("VERSION: %s" % (self.__version))
             return self.__version
 
 class _VLazyCmdClass(dict):
@@ -73,6 +74,8 @@ class _VLazyCmdClass(dict):
             if self.__is_loaded is False:
                   self.update(self.__v.get_cmdclass())
                   self.__is_loaded = True
+
+                  print("CMDCLASS: %s" % (self))
 
             return getattr(self, name)
 
