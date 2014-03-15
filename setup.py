@@ -42,7 +42,7 @@ class _VLazyVersion(str):
       """
 
       def __init__(self, v):
-            super(_VLazyVersion, self).__init__()
+#            super(_VLazyVersion, self).__init__()
 
             self.__v = v
             self.__version = None
