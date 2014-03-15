@@ -99,9 +99,12 @@ long_description=\
 "Requires the python-dbus Ubuntu package or equivalent."
 
 v = _VLazy()
+lv = _VLazyVersion(v)
+print("LV(str): %s" % (str(lv)))
+print("LV(repr): %s" % (repr(lv)))
 
 setup(name='upstart',
-      version=_VLazyVersion(v), #versioneer.get_version(),
+      version=lv, #versioneer.get_version(),
       description="Upstart-based service management.",
       long_description=long_description,
       classifiers=[],
