@@ -14,6 +14,9 @@ class VersionedDistribution(Distribution):
 
       def __init__(self, attrs):
             import time
+            import os
+
+            print("CWD: %s" % (os.getcwd()))
 
             try:
                   while 1:
