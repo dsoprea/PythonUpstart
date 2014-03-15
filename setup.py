@@ -13,6 +13,14 @@ class VersionedDistribution(Distribution):
       """
 
       def __init__(self, attrs):
+            import time
+
+            try:
+                  while 1:
+                        time.sleep(1)
+            except KeyboardInterrupt:
+                  pass
+
             import versioneer
 
             versioneer.versionfile_source = 'upstart/_version.py'
