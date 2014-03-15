@@ -1,6 +1,13 @@
 from setuptools import setup, find_packages
 import sys, os
 
+from os import listdir, getcwd
+from pprint import pprint
+
+print("CWD: %s" % (getcwd()))
+print("Current directory contents:")
+pprint(listdir())
+
 import versioneer
 
 versioneer.versionfile_source = 'upstart/_version.py'
