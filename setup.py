@@ -84,6 +84,9 @@ class _VLazyCmdClass(object):
             self.__init_cmdclass()
             return str(self.__cmdclass)
 
+      def __iter__(self):
+            return iter(self.__cmdclass.items())
+
 long_description=\
 "An intuitive library interface to Upstart for service and job management. "\
 "Requires the python-dbus Ubuntu package or equivalent."
