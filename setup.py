@@ -84,6 +84,12 @@ class _VLazyCmdClass(object):
             self.__init_cmdclass()
             return str(self.__cmdclass)
 
+long_description=\
+"An intuitive library interface to Upstart for service and job management. "\
+"Requires the python-dbus Ubuntu package or equivalent."
+
+v = _VLazy()
+
 setup(name='upstart',
       version=_VLazyVersion(v), #versioneer.get_version(),
       description="Upstart-based service management.",
