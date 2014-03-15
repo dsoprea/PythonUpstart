@@ -30,6 +30,11 @@ class _VLazy(object):
             self.__init_versioneer()
             return self.__versioneer.get_cmdclass()
 
+      def __str__(self):
+            raise Exception("STR!")
+
+      def __repr__(self):
+            raise Exception("REPR!")
 
 class _VLazyVersion(str):
       """Wait to determine the version until someone actually casts us or 
