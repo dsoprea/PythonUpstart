@@ -76,26 +76,21 @@ class _VLazyCmdClass(object):
             self.__init_cmdclass()
             return getattr(self.__cmdclass, name)
 
-#      def __repr__(self):
-#            self.__init_cmdclass()
-#            return repr(self.__cmdclass)
-#
-#      def __str__(self):
-#            self.__init_cmdclass()
-#            return str(self.__cmdclass)
-#
-#      def __iter__(self):
-#            self.__init_cmdclass()
-#            return iter(self.__cmdclass.items())
-#
-#      def __setitem__(self, k, v):
-#            self.__init_cmdclass()
-#            self.__cmdclass[k] = v
+      def __repr__(self):
+            self.__init_cmdclass()
+            return repr(self.__cmdclass)
 
-#del _VLazyCmdClass.__repr__
-del _VLazyCmdClass.__str__
-del _VLazyCmdClass.__iter__
-del _VLazyCmdClass.__setitem__
+      def __str__(self):
+            self.__init_cmdclass()
+            return str(self.__cmdclass)
+
+      def __iter__(self):
+            self.__init_cmdclass()
+            return iter(self.__cmdclass.items())
+
+      def __setitem__(self, k, v):
+            self.__init_cmdclass()
+            self.__cmdclass[k] = v
 
 long_description=\
 "An intuitive library interface to Upstart for service and job management. "\
