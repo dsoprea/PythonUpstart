@@ -1,3 +1,7 @@
 *.pyc
 /dist/
-
+/upstart.egg-info/
+/lib/
+/local/
+/bin/
+/include/
