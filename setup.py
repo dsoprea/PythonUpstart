@@ -85,6 +85,7 @@ class _VLazyCmdClass(object):
             return str(self.__cmdclass)
 
       def __iter__(self):
+            self.__init_cmdclass()
             return iter(self.__cmdclass.items())
 
 long_description=\
