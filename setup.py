@@ -92,7 +92,7 @@ class _VLazyCmdClass(object):
 #            self.__init_cmdclass()
 #            self.__cmdclass[k] = v
 
-del _VLazyCmdClass.__repr__
+#del _VLazyCmdClass.__repr__
 del _VLazyCmdClass.__str__
 del _VLazyCmdClass.__iter__
 del _VLazyCmdClass.__setitem__
