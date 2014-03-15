@@ -40,20 +40,18 @@ class _VLazyVersion(str):
             super(_VLazyVersion, self).__init__()
 
             self.__v = v
-            self.__is_loaded = False
+            self.__version = None
 
       def __repr__(self):
             return str(self)
 
       def __str__(self):
-            if self.__is_loaded is False:
+            if self.__version is None:
                   self.__version = self.__v.get_version()
-                  self.__is_loaded = True
 
-            print("VERSION: %s" % (self.__version))
             return self.__version
 
-class _VLazyCmdClass(dict):
+class _VLazyCmdClass(object):
       """Wait to determine the cmdclass until someone actually requests a 
       particular class, at which point we proxy the request to the actual 
       dictionary.
@@ -63,27 +61,28 @@ class _VLazyCmdClass(dict):
             super(_VLazyCmdClass, self).__init__()
 
             self.__v = v
-            self.__is_loaded = False
+            self.__cmdclass = None
 
-      def __attr__(self, name):
+      def __init_cmdclass(self):
+            if self.__cmdclass is None:
+                  self.__cmdclass = self.__v.get_cmdclass()
+
+      def __getattr__(self, name):
             """Proxy all requests through to the standard dictionary object. 
             The first time we're called, load ourselves with the Versioneer 
             cmdclass entries.
             """
 
-            if self.__is_loaded is False:
-                  self.update(self.__v.get_cmdclass())
-                  self.__is_loaded = True
+            self.__init_cmdclass()
+            return getattr(self.__cmdclass, name)
 
-                  print("CMDCLASS: %s" % (self))
+      def __repr__(self):
+            self.__init_cmdclass()
+            return repr(self.__cmdclass)
 
-            return getattr(self, name)
-
-long_description=\
-"An intuitive library interface to Upstart for service and job management. "\
-"Requires the python-dbus Ubuntu package or equivalent."
-
-v = _VLazy()
+      def __str__(self):
+            self.__init_cmdclass()
+            return str(self.__cmdclass)
 
 setup(name='upstart',
       version=_VLazyVersion(v), #versioneer.get_version(),
