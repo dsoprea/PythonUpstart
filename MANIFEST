@@ -3,4 +3,5 @@ setup.py
 upstart/__init__.py
 upstart/_version.py
 upstart/job.py
+upstart/job_builder.py
 upstart/system.py
