@@ -49,7 +49,9 @@ class _VLazyVersion(str):
             if self.__version is None:
                   self.__version = self.__v.get_version()
 
-            return self.__version
+            ver = self.__version
+            print("VERSION: %s" % (ver))
+            return ver
 
 class _VLazyCmdClass(object):
       """Wait to determine the cmdclass until someone actually requests a 
