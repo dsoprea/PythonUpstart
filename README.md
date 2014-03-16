@@ -17,6 +17,16 @@ layer). This library provides two main areas of functionality:
 sudo pip install upstart
 ```
 
+##Tools
+
+The upstart module also comes packaged with two command-line utilities to help 
+create new jobs. This is a value-added convenience for the end-user, as such
+utilities don't come packages with Upstart, itself.
+
+1. **upstart-create:** Create boilerplate jobs using standard choices.
+2. **upstart-reload:** Force Upstart to reload jobs. Generally, Upstart uses 
+   inotify to sense changes, but sometimes it may need help.
+
 ##Upstart Management API
 
 The management commands usually return D-Bus types. However, they can generally 

@@ -7,7 +7,7 @@ long_description=\
 "Requires the python-dbus Ubuntu package or equivalent."
 
 setup(name='upstart',
-      version='0.2.34',#versioneer.get_version(),
+      version='0.3.0',#versioneer.get_version(),
       description="Upstart-based service management.",
       long_description=long_description,
       classifiers=[],
@@ -21,6 +21,7 @@ setup(name='upstart',
       zip_safe=False,
       install_requires=[],
       entry_points="",
-#      cmdclass=_VLazyCmdClass(v)
+      scripts=['scripts/upstart-create',
+               'scripts/upstart-reload'],
 #      cmdclass=versioneer.get_cmdclass(),
 )

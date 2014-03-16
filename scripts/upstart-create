@@ -1,0 +1,101 @@
+#!/usr/bin/env python2.7
+
+import sys
+sys.path.insert(0, '.')
+
+import argparse
+import re
+import signal
+
+from os.path import isfile, join
+from os import kill
+
+from upstart.job_builder import JobBuilder
+
+description = "A wizard to general boiler-plate Upstart jobs."
+
+parser = argparse.ArgumentParser(description=description)
+
+parser.add_argument('name', help="Name of job")
+parser.add_argument('command', help="Command to run")
+
+parser.add_argument('-a', '--author', 
+                    help="Name of author")
+parser.add_argument('-d', '--description', 
+                    help="Description of job")
+parser.add_argument('-v', '--version', 
+                    help="Version of job")
+parser.add_argument('-j', '--just-display', 
+                    help="Display the job instead of writing it", 
+                    action='store_true')
+
+group = parser.add_mutually_exclusive_group()
+group.add_argument('-f', '--fork', 
+                   help="Expect the process to fork", 
+                   dest='expect', 
+                   action='store_const', 
+                   const='fork')
+
+group.add_argument('-D', '--daemon', 
+                   help="Expect the process to daemonize (fork twice)", 
+                   dest='expect', 
+                   action='store_const', 
+                   const='daemon')
+
+group.add_argument('-s', '--stop', 
+                   help="Expect the process to send a signal when initialized", 
+                   dest='expect', 
+                   action='store_const', 
+                   const='stop')
+
+args = parser.parse_args()
+
+if re.match('^[a-zA-Z0-9\-]+$', args.name) is None:
+    print("Name should only be numbers, letters, and/or dashes: %s" % 
+          (args.name))
+    exit(1)
+
+job_filepath = ('/etc/init/%s.conf' % (args.name))
+
+if isfile(job_filepath) is True:
+    print("Job already exists: %s" % (job_filepath))
+    exit(2)
+
+if args.command[0] != '/':
+    print("Please provide a command with an absolute path: %s" % 
+          (args.command))
+    exit(3)
+
+if isfile(args.command) is False:
+    print("Command does not exist: %s" % (args.command))
+    exit(4)
+
+jb = JobBuilder()
+
+if args.description is not None:
+    jb.description(args.description)
+
+if args.author is not None:
+    jb.author(args.author)
+
+if args.version is not None:
+    jb.version(args.version)
+
+if args.expect is not None:
+    jb.expect(args.expect)
+
+jb.run(args.command).\
+   start_on_runlevel().\
+   stop_on_runlevel().\
+   respawn()
+
+if args.just_display is True:
+    print(str(jb))
+
+else:
+    print("Writing %s." % (job_filepath))
+    with open(job_filepath, 'w') as f:
+        f.write(str(jb))
+
+    kill(1, signal.SIGHUP)
+

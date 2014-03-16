@@ -1,0 +1,11 @@
+#!/usr/bin/env python2.7
+
+import sys
+sys.path.insert(0, '.')
+
+import signal
+
+from os import kill
+
+kill(1, signal.SIGHUP)
+

@@ -419,3 +419,4 @@ class JobBuilder(object):
         assert issubclass(text.__class__, basestring)
 
         return self.__set('usage', self.__quote(text))
+
