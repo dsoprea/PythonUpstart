@@ -23,9 +23,31 @@ The upstart module also comes packaged with two command-line utilities to help
 create new jobs. This is a value-added convenience for the end-user, as such
 utilities don't come packages with Upstart, itself.
 
-1. **upstart-create:** Create boilerplate jobs using standard choices.
-2. **upstart-reload:** Force Upstart to reload jobs. Generally, Upstart uses 
-   inotify to sense changes, but sometimes it may need help.
+###upstart-create
+
+Create boilerplate jobs using standard choices.
+
+```
+$ upstart-create test-job /bin/sh -j -d "some description" -a "some author <some@author>"
+description "some description"
+author "some author <some@author>"
+exec /bin/sh
+start on runlevel [2345]
+stop on runlevel [016]
+respawn 
+```
+
+We specified the "-j" option to just print to the screen rather than write a 
+job file.
+
+###upstart-reload
+
+Force Upstart to reload jobs. Generally, Upstart uses inotify to sense changes, 
+but sometimes it may need help.
+
+```
+$ upstart-reload
+```
 
 ##Upstart Management API
 
