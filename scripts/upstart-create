@@ -61,13 +61,15 @@ if isfile(job_filepath) is True:
     print("Job already exists: %s" % (job_filepath))
     exit(2)
 
-if args.command[0] != '/':
+command_filepath = args.command[:args.command.index(' ')]
+
+if command_filepath[0] != '/':
     print("Please provide a command with an absolute path: %s" % 
-          (args.command))
+          (command_filepath))
     exit(3)
 
-if isfile(args.command) is False:
-    print("Command does not exist: %s" % (args.command))
+if isfile(command_filepath) is False:
+    print("Command does not exist: %s" % (command_filepath))
     exit(4)
 
 jb = JobBuilder()
