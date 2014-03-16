@@ -9,7 +9,7 @@ layer). This library provides two main areas of functionality:
 
 ##Dependencies
 
-- *python-dbus* (under Ubuntu), or equivalent.
+- *python-dbus* (under Apt), or equivalent.
 
 ##Installation
 
