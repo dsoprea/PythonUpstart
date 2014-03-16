@@ -201,11 +201,16 @@ class JobBuilder(object):
         events = self.__stringify_events(events, conjunct)
         return self.__set('start on', events)
 
-    def start_on_runlevel(self, runlevels=[2,3,4,5]):
-        assert issubclass(runlevels.__class__, list)
+    def start_on_runlevel(self, runlevels='2345'):
+        assert issubclass(runlevels.__class__, (list, str))
 
-        runlevels = [str(r) for r in runlevels]
-        return self.__set('start on', ('runlevel [%s]' % (''.join(runlevels))))
+        if issubclass(runlevels.__class__, list) is True:
+            runlevels = [str(r) for r in runlevels]
+            runlevel_phrase = ''.join(runlevels)
+        else:
+            runlevel_phrase = runlevels
+        
+        return self.__set('start on', ('runlevel [%s]' % (runlevel_phrase)))
 
     def start_on_before_started(self, service):
         assert issubclass(service.__class__, basestring)
@@ -226,11 +231,16 @@ class JobBuilder(object):
         events = self.__stringify_events(events, conjunct)
         return self.__set('stop on', events)
 
-    def stop_on_runlevel(self, runlevels=[0,1,6]):
-        assert issubclass(runlevels.__class__, list)
+    def stop_on_runlevel(self, runlevels='!2345'):
+        assert issubclass(runlevels.__class__, (list, str))
 
-        runlevels = [str(r) for r in runlevels]
-        return self.__set('stop on', ('runlevel [%s]' % (''.join(runlevels))))
+        if issubclass(runlevels.__class__, list) is True:
+            runlevels = [str(r) for r in runlevels]
+            runlevel_phrase = ''.join(runlevels)
+        else:
+            runlevel_phrase = runlevels
+        
+        return self.__set('stop on', ('runlevel [%s]' % (runlevel_phrase)))
 
     def stop_on_before_stopped(self, service):
         assert issubclass(service.__class__, basestring)
