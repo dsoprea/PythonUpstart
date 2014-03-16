@@ -7,6 +7,23 @@ from distutils.dist import Distribution
 print("MODULE: %s" % (__name__))
 
 
+import termios, sys, os
+ 
+def read_keys():
+    fd = sys.stdin.fileno()
+    old = termios.tcgetattr(fd)
+    new = termios.tcgetattr(fd)
+    new[3] = new[3] & ~termios.ICANON & ~termios.ECHO
+    new[6][termios.VMIN] = 1
+    new[6][termios.VTIME] = 0
+    termios.tcsetattr(fd, termios.TCSANOW, new)
+    try:
+        while 1:
+            yield os.read(fd, 1)
+    finally:
+        termios.tcsetattr(fd, termios.TCSAFLUSH, old)
+
+
 class VersionedDistribution(Distribution):
       """We set the versioneer components once the flow actually begins, and 
       all of the modules are in place.
@@ -18,11 +35,8 @@ class VersionedDistribution(Distribution):
 
             print("CWD: %s" % (os.getcwd()))
 
-            try:
-                  while 1:
-                        time.sleep(1)
-            except KeyboardInterrupt:
-                  pass
+            print("Press key.")
+            read_keys().next()
 
             import versioneer
 
