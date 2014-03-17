@@ -7,7 +7,7 @@ long_description=\
 "Requires the python-dbus Ubuntu package or equivalent."
 
 setup(name='upstart',
-      version='0.3.1',#versioneer.get_version(),
+      version='0.3.2',#versioneer.get_version(),
       description="Upstart-based service management.",
       long_description=long_description,
       classifiers=[],
