@@ -55,12 +55,6 @@ if re.match('^[a-zA-Z0-9\-]+$', args.name) is None:
           (args.name))
     exit(1)
 
-job_filepath = ('/etc/init/%s.conf' % (args.name))
-
-if isfile(job_filepath) is True:
-    print("Job already exists: %s" % (job_filepath))
-    exit(2)
-
 command_filepath = args.command[:args.command.index(' ')]
 
 if command_filepath[0] != '/':
@@ -83,18 +77,24 @@ if args.author is not None:
 if args.version is not None:
     jb.version(args.version)
 
-if args.expect is not None:
-    jb.expect(args.expect)
-
 jb.run(args.command).\
    start_on_runlevel().\
    stop_on_runlevel().\
    respawn()
 
+if args.expect is not None:
+    jb.expect(args.expect)
+
 if args.just_display is True:
     print(str(jb))
 
 else:
+    job_filepath = ('/etc/init/%s.conf' % (args.name))
+
+    if isfile(job_filepath) is True:
+        print("Job already exists: %s" % (job_filepath))
+        exit(2)
+
     print("Writing %s." % (job_filepath))
     with open(job_filepath, 'w') as f:
         f.write(str(jb))
