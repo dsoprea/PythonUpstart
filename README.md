@@ -247,172 +247,230 @@ end script
 #### run(command)
 
 - Stanza: 'exec', 'script'
+- The command to run. Can be a string or a script object.
 
 #### pre_start(command)
 
 - Stanza: 'pre-start'
+- A pre-start command to run. Can be a string or a script object.
 
 #### post_start(command)
 
 - Stanza: 'post-start'
+- A post-start command to run. Can be a string or a script object.
 
 #### pre_stop(command)
 
 - Stanza: 'pre-stop'
+- A pre-stop command to run. Can be a string or a script object.
 
 #### post_stop(command)
 
 - Stanza: 'post-stop'
+- A post-stop command to run. Can be a string or a script object.
 
 #### start_on(events, conjunct=None)
 
 - Stanza: 'start_on'
+- One or more start conditions, best expressed via example:
+  - start_on('abc')
+  - start_on(('abc', {'aa': 1, 'bb': 2}))
+  - start_on(['abc', 'def'], conjunct='and')
+  - start_on([('abc', {'aa': 1, 'bb': 2}), 
+              ('def', {'cc': 3, 'dd': 4})], 
+             conjunct='and')
+  - start_on('abc aa=1 bb=2 and def cc=3 dd=4')
+
+  Depending on the complexity of your conditions, you may prefer passing a
+  string, directly (as in the last example).
 
 #### start_on_runlevel(runlevels=[2,3,4,5])
 
 - Stanza: 'start on runlevel'
+- One or more runlevels to start on. Can be a list of integers, or a string.
 
 #### start_on_before_started(service)
 
 - Stanza: 'start on starting'
+- Start the job whenever another job is started (before it starts).
 
 #### start_on_after_started(service)
 
 - Stanza: 'start on started'
+- Start the job whenever another job has started (after it starts).
 
 #### stop_on(events, conjunct=None)
 
 - Stanza: 'stop on'
+- One or more stop conditions, using the same syntax as [start on](#start_onevents-conjunctnone).
 
-#### stop_on_runlevel(runlevels=[0,1,6])
+#### stop_on_runlevel(runlevels='!2345')
 
 - Stanza: 'stop on runlevel'
+- One or more runlevels to stop on. Can be a list of integers, or a string.
 
 #### stop_on_before_stopped(service)
 
 - Stanza: 'stop on stopping'
+- Stop the job whenever another job has stopped (before it stops).
 
 #### stop_on_after_stopped(service)
 
 - Stanza: 'stop on stopped'
+- Stop the job whenever another job has stopped (after it stops).
 
 #### description(description)
 
 - Stanza: 'description'
+- A description of the job.
 
 #### author(author)
 
 - Stanza: 'author'
+- The author of the job. Should look like "FirstName LastName <email@address>".
 
 #### version(version)
 
 - Stanza: 'version'
+- The version of the job.
 
 #### emits(emits):
 
 - Stanza: 'emits'
+- The Upstart events that the process (or one of its children) might emit 
+  (presumably via D-Bus).
 
 #### expect(type_='daemon')
 
 - Stanza: 'expect fork', 'expect daemon', 'expect stop'
+- The type of forking that the process will do, so that Upstart can track the 
+  PID properly.
 
 #### respawn()
 
 - Stanza: 'respawn'
+- Whether to restart the process when it comes down (with an exit-code of (0)).
 
 #### respawn_limit(count, timeout_s)
 
 - Stanza: 'respawn limit'
+- The maximum number of times to allow a processes to be respawned.
 
 #### kill_timeout(timeout_s)
 
 - Stanza: 'kill timeout'
+- How long to wait for a process to come down before killing it.
 
-#### normal_exist(normal_codes=[], normal_signals=[])
+#### normal_exit(normal_codes=[], normal_signals=[])
 
-- Stanza: 'normal timeout'
+- Stanza: 'normal exit'
+- What exit-codes and/or signals to consider as a normal exit.
 
 #### console(target)
 
 - Stanza: 'console'
+- Where to send process output:
+  - 'logged'
+  - 'output'
+  - 'owner'
+  - None
 
 #### env(key, value)
 
 - Stanza: 'env'
+- A key-value to set into the environment.
 
-#### env_kv(dict_)
+#### env_kv(env)
 
 - Stanza: 'env'
+- Sets N number of environment key values from a dictionary.
 
 #### export(env_name)
 
 - Stanza: 'export'
+- Set the given environment value into all events emitted from this job.
 
 #### nice(priority)
 
 - Stanza: 'nice'
+- Process priority.
 
 #### limit(resource, soft_limit, hard_limit)
 
 - Stanza: 'nproc'
+- Set resource limits.
 
 #### chdir(path)
 
 - Stanza: 'chdir'
+- Set the working-directory.
 
 #### chroot(path)
 
 - Stanza: 'chroot'
-
-#### nice(priority)
-
-- Stanza: 'nice'
+- Set a chroot path.
     
 #### apparmor_load(profile_path)
 
 - Stanza: 'apparmor load'
+- The AppArmor profile to load into the kernel and impose onto the process.
     
 #### apparmor_switch(profile)
 
 - Stanza: 'apparmor switch'
+- Impose an already-loaded AppArmor profile.
 
 #### instance(var_name)
 
 - Stanza: 'instance'
+- Indicate the variable to describe the randomized name of one specific 
+  instance of a multi-instance job.
 
 #### kill_signal(signal)
 
 - Stanza: 'kill signal'
+- Describe the signal to be sent to the process to kill it (when a normal stop
+  times out).
 
 #### manual()
 
 - Stanza: 'manual'
+- Set to ignore any "start on" or "stop on" stanzas (perhaps for debugging).
 
 #### oom_score(score)
 
 - Stanza: 'oom score'
+- OOM bias for likelihood of being killed.
 
 #### reload_signal(signal)
 
 - Stanza: 'reload signal'
+- The signal to emit to tell the process to reload.
 
 #### setgid(group_name)
 
 - Stanza: 'setgid'
+- User group to run as.
 
 #### setuid(user_name)
 
 - Stanza: 'setuid'
+- User name to run as.
 
 #### task()
 
 - Stanza: 'task'
+- Indicates that any jobs that are triggered by us should wait until this job 
+  comes down (because we're a non-respawnable task that does some prerequisite 
+  task).
 
 #### umask(value)
 
 - Stanza: 'umask'
+- Set the file-mode creation mask.
 
 #### usage(text)
 
 - Stanza: 'usage'
+- Usage/help string for the job, such as might be queried by initctl.
 
