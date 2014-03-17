@@ -303,17 +303,18 @@ class JobBuilder(object):
 
         return self.__set('kill timeout', timeout_s)
 
-    def normal_exist(self, normal_codes=[], normal_signals=[]):
+    def normal_exit(self, normal_codes=[], normal_signals=[]):
         """Define what to expect for a successful exist. "codes" are integers, 
         and "signals" are name strings (and, possibly, signal integers).
         """
 
         if not normal_codes and not normal_signals:
-            raise ValueError("Please provide at least one code/signal for a normal exit.")
+            raise ValueError("Please provide at least one code/signal for a "
+                             "normal exit.")
 
         normal_codes = [str(c) for c in normal_codes]
 
-        return self.__set('normal timeout', ' '.join(normal_codes + normal_signals))
+        return self.__set('normal exit', ' '.join(normal_codes + normal_signals))
 
     def console(self, target):
         if target not in ('log', 'output', 'owner', None):
@@ -330,9 +331,9 @@ class JobBuilder(object):
 # TODO(dustin): Can we escape/quote the key/value?
         return self.__add('env', ('%s=%s' % (key, value)))
 
-    def env_kv(self, dict_):
+    def env_kv(self, env):
 # TODO(dustin): How do we escape/quote the key/value?
-        for k, v in dict_.iteritems():
+        for k, v in env.iteritems():
             self.env_kv(k, v)
 
         return self
@@ -369,11 +370,6 @@ class JobBuilder(object):
 
         return self.__set('chroot', path)
 
-    def nice(self, priority):
-        assert issubclass(priority.__class__, int)
-
-        return self.__set('nice', priority)
-    
     def apparmor_load(self, profile_path):
         assert issubclass(profile_path.__class__, basestring)
 
